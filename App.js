@@ -1,29 +1,46 @@
 import GlobalStyles from "./GlobalStyles";
-import { SafeAreaView, StyleSheet,   View, } from "react-native";
+import React,{useState} from "react";
+import { SafeAreaView, StyleSheet, Text,  View,FlatList } from "react-native";
+import Header from "./components/Header";
+import ListItem from "./components/ListItem";
+import Form from "./components/Form";
 
 export default function App() {
+  const [listOfItems,setListOfItems]=useState([
+    {text:"Buy Milk",key:"1"},
+    {text:"Buy Cola",key:"2"},
+    {text:"Buy Fanta",key:"3"},
+    {text:"Buy Pepsi",key:"4"},
+  ])
+  const addHandler=(text)=>{
+    setListOfItems((list)=>{
+      return [
+        {text:text,key:Math.random().toString(36).substring(7)},
+        ...list
+      ]
+    })
+  }
+  const deleteHandler=(key)=>{
+    setListOfItems((list)=>{
+      return list.filter(listOfItems=>listOfItems.key !=key)
+    })
+  }
 return (
     <SafeAreaView style={GlobalStyles.droidSafeArea}>
-      <View  style={styles.mainBlock} >
-     <View style={[styles.box,{backgroundColor:"rede",flex:2}]}></View>
-     <View style={[styles.box,{backgroundColor:"blue",flex:2}]}></View>
-     <View style={[styles.box,{backgroundColor:"orange"}]}></View>
-     </View>
+    <View>
+  <Header/>
+  <Form addHandler={addHandler}/>
+  <View>
+        <FlatList data={listOfItems} renderItem={({item})=>(
+       <ListItem item={item} deleteHandler={deleteHandler}/>
+)}/>
+  </View>
+    </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-mainBlock:{
-  flex:1,
-  
-  flexDirection:"row"
-},
-box:{
-  flex:1,
- width:100,
-height:100
-},
 
 })
 
