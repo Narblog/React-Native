@@ -5,7 +5,7 @@ export default function App() {
 return (
     <SafeAreaView style={GlobalStyles.droidSafeArea}>
       <View  style={styles.mainBlock} >
-     <View style={[styles.box,{backgroundColor:"red",flex:2}]}></View>
+     <View style={[styles.box,{backgroundColor:"rede",flex:2}]}></View>
      <View style={[styles.box,{backgroundColor:"blue",flex:2}]}></View>
      <View style={[styles.box,{backgroundColor:"orange"}]}></View>
      </View>
